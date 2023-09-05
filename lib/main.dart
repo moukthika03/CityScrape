@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:weather/weather.dart';
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'places.dart';
 import 'bookings.dart';
 import 'weather.dart';
-//import 'package:pay/pay.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 int imageIndex=0;
-// List images=[];
 
 String imageFile="";
 // const paymentItems = [
@@ -30,10 +29,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Tour Planner",
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      title: "Cityscrape",
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        /* dark theme settings */
       ),
+      themeMode: ThemeMode.dark,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         body: MainLayout(),),
@@ -100,11 +101,6 @@ class _HotelState extends State<Hotel> {
 
   @override
   Widget build(BuildContext context) {
-    // return MaterialApp(
-    //   title: 'Hotel Images',
-    //   theme: ThemeData(primarySwatch: Colors.lightGreen),
-    //   home: DisplayPage(),
-    // );
     return Scaffold(
       resizeToAvoidBottomInset: false,
        body:SingleChildScrollView(
@@ -454,7 +450,7 @@ class _MainLayoutState extends State<MainLayout> {
     return Scaffold(
       resizeToAvoidBottomInset:false ,
       appBar: AppBar(
-        title: Text('Tour Planner'),
+        title: Text('Cityscrape'),
 
       ),
       body:Center(
@@ -464,8 +460,8 @@ class _MainLayoutState extends State<MainLayout> {
         child: Column(
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: Text('Tour Planners'),
-              accountEmail: Text('TourPlanners@gmail.com'),
+              accountName: Text('Cityscrape'),
+              accountEmail: Text('Cityscrape@gmail.com'),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Text("TP"),
@@ -519,61 +515,43 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Padding(
-
+    return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 7.0),
         child: Container(
+          color: Theme.of(context).primaryColor,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text.rich(TextSpan(
-                    text: 'Welcome',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    children: [
-                      TextSpan(
-                        text: 'To Tour Planners',
-                      ),
-                    ]
-                ),
-                  style: TextStyle(fontSize: 50),
-                ),
                 SizedBox(height: 30),
                 TextField(
                   controller: nameController,
+                  onSubmitted: (value) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => InfoRoute()),
+                        );
+                  },
                   decoration: InputDecoration(
                     // prefixIcon: Icon(Icons.search, size: 18),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.blueGrey,
+                      size: 20.0,
+                    ),
+
                     border: OutlineInputBorder(
+                      // borderSide: BorderSide(color: Colors.purple),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     hintText: 'Enter the City',
                   ),
                 ),
-                //SizedBox(height: 10),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 140),
-                  child: FlatButton(
-                    color: Colors.lightBlueAccent,
-                    textColor: Colors.white,
-                    onPressed: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => InfoRoute()),
-                      );
-                      setState(() {
-                        print(nameController.text);
-                      });
-                    },
-                    child: Text("Search"),
-                  ),
-                ),
 
-                SizedBox(height: 10),
-                Center(
+                SizedBox(height: 80),
+               Center(
                   child: Text(
-                    'Popular Places',
+                    'Natural Treasures',
                     style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
                   ),
                 ),
@@ -581,90 +559,179 @@ class _HomePageState extends State<HomePage> {
                   SingleChildScrollView(
                     child:
                   Container(
-                    height:300,
-                    child: Carousel(
-                      images: [
-                        AssetImage('images/16.jpg'),
-                        AssetImage('images/17.jpg'),
-                        AssetImage('images/12.jpg'),
-                        AssetImage('images/13.jpg'),
-                        AssetImage('images/14.jpg'),
-                        AssetImage('images/15.jpg'),
+                    height: 300,
+                    child: CarouselSlider(
+                    options: CarouselOptions(
+                      autoPlay: false,
+                    ),
+                      items: [
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width:1,
+                              color: Colors.grey,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                            image: new DecorationImage(image: new AssetImage('images/ooty.jpg'), fit: BoxFit.fill,),
+
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width:1,
+                              color: Colors.grey,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                            image: new DecorationImage(image: new AssetImage('images/hogenakkal.jpeg'), fit: BoxFit.fill,),
+                          ),
+                          // child:  Image.asset('images/hogenakkal.jpeg'),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width:1,
+                              color: Colors.grey,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                            image: new DecorationImage(image: new AssetImage('images/marinabeach.jpeg'), fit: BoxFit.fill,),
+
+                          ),
+                          // child:   Image.asset('images/marinabeach.jpeg')
+                        ),
                       ],
                     ),
                   ),
                   ),
-                SizedBox(height: 5),
+
+                SizedBox(height: 40),
+
                 Center(
                   child: Text(
-                    'Popular Hotels',
+                    'Favourites',
                     style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
                   ),
                 ),
+                SizedBox(height: 20),
                 SingleChildScrollView(
                   child:
                   Container(
-                    height:300,
-                    child: Carousel(
-                      images: [
-                        AssetImage('images/2.jpg'),
-                        AssetImage('images/3.jpg'),
-                        AssetImage('images/4.jpg'),
-                        AssetImage('images/5.jpg'),
-                        AssetImage('images/6.jpg'),
-                        AssetImage('images/7.jpg'),
+                    height: 300,
+                    child: CarouselSlider(
+                      options: CarouselOptions(
+                        autoPlay: false,
+                      ),
+                      items: [
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width:1,
+                              color: Colors.grey,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                            image: new DecorationImage(image: new AssetImage('images/temple.jpeg'), fit: BoxFit.fill,),
+
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width:1,
+                              color: Colors.grey,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                            image: new DecorationImage(image: new AssetImage('images/hogenakkal.jpeg'), fit: BoxFit.fill,),
+                          ),
+                          // child:  Image.asset('images/10.jpg'),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width:1,
+                              color: Colors.grey,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                            image: new DecorationImage(image: new AssetImage('images/marinabeach.jpeg'), fit: BoxFit.fill,),
+
+                          ),
+                          // child:   Image.asset('images/20.jpg')
+                        ),
                       ],
                     ),
                   ),
                 ),
+
+                SizedBox(height: 40),
                 Center(
                   child: Text(
-                    'Events Of The Month',
+                    'Archives',
                     style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
                   ),
                 ),
+                SizedBox(height: 10),
                 SingleChildScrollView(
                   child:
                   Container(
-                    height:300,
-                    child: Carousel(
-                      images: [
-                        AssetImage('images/18.jpg'),
-                        AssetImage('images/19.jpg'),
-                        AssetImage('images/20.jpg'),
-                        AssetImage('images/21.jpeg'),
+                    height: 300,
+                    child: CarouselSlider(
+                      options: CarouselOptions(
+                        autoPlay: false,
+                      ),
+                      items: [
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width:1,
+                              color: Colors.grey,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                            image: new DecorationImage(image: new AssetImage('images/18.jpg'), fit: BoxFit.fill,),
+
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width:1,
+                              color: Colors.grey,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                            image: new DecorationImage(image: new AssetImage('images/19.jpg'), fit: BoxFit.fill,),
+                          ),
+                          // child:  Image.asset('images/19.jpeg'),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(6.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width:1,
+                              color: Colors.grey,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                            image: new DecorationImage(image: new AssetImage('images/20.jpg'), fit: BoxFit.fill,),
+
+                          ),
+                          // child:   Image.asset('images/20.jpeg')
+                        ),
                       ],
                     ),
                   ),
                 ),
-                Center(
-                  child: Text(
-                    'Favourite Spots',
-                    style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
-                  ),
-                ),
-                SingleChildScrollView(
-                  child:
-                  Container(
-                    height:300,
-                    child: Carousel(
-                      images: [
-                        AssetImage('images/13.jpg'),
-                        AssetImage('images/10.jpg'),
-                        AssetImage('images/20.jpg'),
-                        AssetImage('images/14.jpg'),
-                        AssetImage('images/15.jpg'),
-                      ],
-                    ),
-                  ),
-                ),
+
               ],
             ),
           ),
         ),
-      ),
-      backgroundColor: Colors.white,
-    );
+      );
+
   }
 }
 class App extends StatelessWidget {

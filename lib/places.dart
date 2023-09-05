@@ -32,7 +32,7 @@ class _InfoRouteState extends State<InfoRoute> {
   }
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title:Text('Top Places'),
@@ -53,7 +53,7 @@ class _InfoRouteState extends State<InfoRoute> {
 
                     return Card(
 
-                      color: Colors.lightBlueAccent,
+                      color: Colors.deepPurpleAccent,
                       margin: const EdgeInsets.all(10),
                       child: ListTile(
 
@@ -87,12 +87,6 @@ class _InfoRouteState extends State<InfoRoute> {
                         ),
                         leading:Container(
                           decoration: BoxDecoration(
-                            // image: DecorationImage(
-                            //     image: AssetImage(_items[index]["image"]),
-                            //
-                            //     fit: BoxFit.fitWidth
-                            //
-                            // )
                           ),
                           child: Image.asset(_items[index]["image"], fit: BoxFit.cover,),
                         ),

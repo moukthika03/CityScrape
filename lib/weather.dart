@@ -252,22 +252,6 @@ class _WeatherInfState extends State<WeatherInf> {
 
                               ],
                             ),
-                            // leading: TextButton(
-                            //   child: Text(
-                            //     'Fetch weather',
-                            //     style: TextStyle(color: Colors.white),
-                            //   ),
-                            //   onPressed: ()
-                            //
-                            //   async {
-                            //     await queryWeather(_items[index]["latitude"],_items[index]["longitude"]);
-                            //   },
-                            //   style: ButtonStyle(
-                            //       backgroundColor: MaterialStateProperty.all(Colors.blue)),
-                            // ),
-
-
-                            // subtitle: Text(_temps[index].toString()),
                           ),
                         );
                       },
